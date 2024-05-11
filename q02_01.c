@@ -7,6 +7,10 @@
 #include "./libs/dorm.h"
 #include "./libs/student.h"
 #include "./libs/gender.h"
+#include "student.h"
+
+
+int find_id(char *nim, int zstd, struct student_t *mhs); // Deklarasi fungsi find_id
 
 int main() {
     char input[75];
@@ -23,6 +27,9 @@ int main() {
         input[strcspn(input, "\r\n")] = '\0';
 
         token = strtok(input, "#");
+        if (token == NULL)
+            continue;
+
         if (strcmp(token, "---") == 0) {
             break;
         } else if (strcmp(token, "dorm-add") == 0) {
@@ -56,14 +63,14 @@ int main() {
         } else if (strcmp(token, "assign-student") == 0) {
             char *nim = strtok(NULL, "#");
             char *asrama = strtok(NULL, "#");
-            assign_student(mhs, nim, asrama, zstd, zdrm, find_id);
+            assign_student(mhs, nim, asrama, zstd, zdrm, find_id); // Memanggil fungsi assign_student
         } else if (strcmp(token, "move-student") == 0) {
             char *nim = strtok(NULL, "#");
             char *asrama = strtok(NULL, "#");
-            move_student(mhs, nim, asrama, zstd, zdrm, find_id);
+            move_student(mhs, nim, asrama, zstd, zdrm, find_id); // Memanggil fungsi move_student
         } else if (strcmp(token, "dorm-empty") == 0) {
             char *asrama = strtok(NULL, "#");
-            dorm_empty(asrama, zstd, zdrm, mhs);
+            dorm_empty(asrama, zstd, zdrm, mhs); // Memanggil fungsi dorm_empty
         }
     }
     free(mhs);
