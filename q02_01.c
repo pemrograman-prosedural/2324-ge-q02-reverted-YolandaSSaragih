@@ -15,12 +15,12 @@ int main() {
     struct dorm_t *drm = NULL; 
     int zstd = 0;
     int sizee = 0;
-    struct student_t *mhs = NULL; // Initialize to NULL to use realloc later
+    struct student_t *mhs = NULL;
     char *token;
 
     while (1) {
         fgets(input, sizeof(input), stdin);
-        input[strcspn(input, "\r\n")] = '\0'; // Remove trailing newline
+        input[strcspn(input, "\r\n")] = '\0';
 
         token = strtok(input, "#");
         if (strcmp(token, "---") == 0) {
@@ -40,8 +40,10 @@ int main() {
             }
         } else if (strcmp(token, "student-add") == 0) {
             sizee++;
+            char nim[10], name[25], year[6];
+            int gender = 0;
             mhs = realloc(mhs, sizee * sizeof(struct student_t));
-            mhs[zstd] = create_student(input);
+            mhs[zstd] = create_student(nim, name, year, gender);
             zstd++;
         } else if (strcmp(token, "student-print-all") == 0) {
             for (int m = 0; m < zstd; m++) {
